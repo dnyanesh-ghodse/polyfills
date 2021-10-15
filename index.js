@@ -1,63 +1,66 @@
 
-//2 polyfilld for Split(), Join() and reverse().
+// polyfilld for Split(), Join() and reverse().
 
 let arr = [1,2,3,4,5,6,7]
-let str = "Hello-how-are-you"
-
+let str = "Hello-how-are you dd"
 
 // 1 split 
 const spliter = (str,delim) => {
-  let newStr = str.replaceAll(delim," ");
-  let arr = [];
-  let a = ''
-  if(delim === ""){
-    for(let char of newStr){
-      arr.push(char)
-    }
-  }
-  if(newStr.includes(" ")){
-    newStr+= " "
-    for(let char of newStr){
-      if(char === " "){
-        arr.push(a.trim());
-        a = ""
-      }else{
-        a+=char
+   let arr = [];
+   if (!delim) {
+     arr.push(str)
+   } else {
+    let newStr = str.replaceAll(delim," ");
+    let a = ''
+    if(delim === ""){
+      for(let char of newStr){
+        arr.push(char)
       }
+    } else if(newStr.includes(" ")){
+      newStr+= " "
+      for(let char of newStr){
+        if(char === " "){
+          arr.push(a.trim());
+          a = ""
+        }else{
+          a+=char
+        }
+      }
+    } else{
+      arr.push(str)
     }
-  }else{
-    arr.push(str)
-  }
+  }  
   return arr
 }
 
-console.log("mySplit --------",spliter(str))
+console.log("mySplit - ",spliter(str))
+console.log("native split - ",str.split())
 
-console.log("native split --------",str.split())
-
+// join
  const myJoin = function (arr,separator) {
     let str = "";
-    if(!separator){
-        for(let item of arr){
-            str+=item + ","
-        }
-    }else{
-        for(let item of arr){
-            str+=item + separator
-        }
-    }
-
+  if(separator === undefined) {
+      for(let item of arr){
+          str+=item + ","
+      }
+  }else if(separator === ""){
+      for(let item of arr){
+          str+=item
+      }
+  }else{
+      for(let item of arr){
+          str+=item + separator
+      }
+  }
    let a =  str.slice(0,str.indexOf(arr[arr.length - 1])) + arr[arr.length - 1]
     return a
 }
 
-console.log("myJoin ---- ",myJoin(arr,"#")) //self
-console.log('native Join ---- ',arr.join("#")); //native
-
+console.log("myJoin - ",myJoin(arr,"-")) //self
+console.log('native Join - ',arr.join("-")); //native
 
 
 //3  reverse 
-
 function myReverse(arr) {
     let rev = []
     for (let i = arr.length - 1; i >= 0; i--) {
